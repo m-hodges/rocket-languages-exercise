@@ -16,18 +16,21 @@ const App = () => {
   var [loading, setLoading] = React.useState(true);
   //placeholder state to reset catFacts to normal after search is closed
   var [unfilteredCatFacts, setUnfilteredCatFacts] = React.useState(null)
+  var [inputIsFocused, setInputIsFocused] = React.useState(false)
 
   React.useEffect(function onMount() {
-    console.log('hi')
     // When component mounts, listen for keydown events
-    window.addEventListener("keydown", onKeyDown)
+    if(!inputIsFocused) {
+      window.addEventListener("keydown", onKeyDown)
+    }
     // Unmount the event listener when the component unmounts
     return function cleanup () {
       window.removeEventListener("keydown", onKeyDown)
     }
-  }, [searchFormIsOpen]);
+  });
 
   function closeSearchForm() {
+    setInputIsFocused(false)
     setSearchFormIsOpen(false)
     setCatFacts(unfilteredCatFacts)
   }
@@ -37,7 +40,14 @@ const App = () => {
     if (event.keyCode === 83) {
       setSearchFormIsOpen(!searchFormIsOpen)
       }
-   }
+  }
+
+  //removes window event handler when user clicks on input box so they can type 's'
+  //window event handler is added back again when user clicks the close button
+  function onFocus () {
+    setInputIsFocused(true)
+    window.removeEventListener("keydown", onKeyDown)
+  }
 
   if (loading) {
     // Fetches all cat facts
@@ -70,10 +80,9 @@ const App = () => {
         {searchFormIsOpen && 
             <SearchForm 
                 onClose={closeSearchForm} 
-                onKeyDown={onKeyDown} 
-                list={catFacts} 
                 setCatFacts={setCatFacts}
                 unfilteredCatFacts={unfilteredCatFacts}
+                onFocus={onFocus}
             />
         }
         <AllCatFacts list={catFacts} />
