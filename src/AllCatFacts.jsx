@@ -1,3 +1,5 @@
+import CatFact from './CatFact'
+
 const React = require('react')
 
 // Requirements:
@@ -7,23 +9,28 @@ const React = require('react')
 const AllCatFacts = (props) => {
       // Expected output [ { _id: "", upvotes: 1, text: "" }, { _id: "", upvotes: 2, text: "" }, { _id: "", upvotes 3, text: "" } ]
     
-      React.useEffect(() => {
-        console.log('from use effect')
-        console.log(props.list)
-      }, [props.list])
+      // React.useEffect(() => {
+      //   console.log('from use effect')
+      //   console.log(props.list)
+      // }, [props.list])
     
-      const hide = (index) => {
-        props.list.splice(index, 1)
-      }
+      // const hide = (index) => {
+      //   props.list.splice(index, 1)
+      // }
     
         return (
           <ul>
             {
               props.list.map((catFact, i) => (
-                <li key={i}>
-                  <span>[{catFact.upvotes} upvotes]: {catFact.text}</span>
-                  <button onClick={() => hide(i)}>x</button>
-                </li>
+                <CatFact 
+                  key={i}
+                  upvotes={catFact.upvotes}
+                  text={catFact.text}
+                />
+                // <li key={i}>
+                //   <span>[{catFact.upvotes} upvotes]: {catFact.text}</span>
+                //   <button onClick={() => hide(i)}>x</button>
+                // </li>
               ))
             }
           </ul>
