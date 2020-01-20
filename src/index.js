@@ -53,7 +53,7 @@ export default function App() {
     // Toggle search form visibility when the user taps "s" anywhere on the window
     if (event.keyCode === 83) {
       console.log('hi')
-        setSearchFormIsOpen(!searchFormIsOpen);
+      setSearchFormIsOpen(!searchFormIsOpen);
       }
    }
   
@@ -85,7 +85,8 @@ export default function App() {
       <>     
         <h1>Cat Facts</h1>
         <span>Tap 's' to toggle the search form!</span>
-        {SearchForm({ onClose: closeSearchForm })}      
+        {searchFormIsOpen && <SearchForm onClose={closeSearchForm} />}
+        {/* {SearchForm({ onClose: closeSearchForm })} */}
         <AllCatFacts list={catFacts} />
         <footer>Copyright</footer>
       </>
@@ -106,27 +107,22 @@ export default function App() {
 // - mount/unmount when the user taps "s".
 // - unmount when the user presses the "Close" button
 // props: {onClose: Function}
-const SearchForm = (props) => {
-// class SearchForm extends React.Component {
-  // render() {
+class SearchForm extends React.Component {
+  render() {
     return (
       <div style={{border: "2px dashed red"}}>
         <h2>Search Form</h2>
-        <button onClick={props.onClose()}>Close</button>
+        <button onClick={() => (this.props.onClose())}>Close</button>
       </div>
     )
   }
-// };
+};
 
 // Requirements:
 // - display an unordered list, displaying: "[x upvotes] {text}" per line
 // - A button on each line that can "hide" the line
 // props: { list: [{ _id: string, text: string, upvotes: number }] }
 class AllCatFacts extends React.Component {
-  constructor (props) {
-    super(props)
-    console.log(props)
-  }
   // Expected output [ { _id: "", upvotes: 1, text: "" }, { _id: "", upvotes: 2, text: "" }, { _id: "", upvotes 3, text: "" } ]
 
   sortListByUpvotesDescending() {
@@ -147,15 +143,16 @@ class AllCatFacts extends React.Component {
     this.sortListByUpvotesDescending();
   }
 
-  // hide() { }
+  hide() { }
 
   render() {
     var componentList = [];
+    // eslint-disable-next-line
     this.props.list.map((catFact) => {
       componentList.push(
         <li>
           <span>[{catFact.upvotes} upvotes]: {catFact.text}</span>
-          {/* <button onClick={hide}>x</button> */}
+          <button onClick={this.hide}>x</button>
         </li>
       );
     });
