@@ -31,7 +31,7 @@ const App = () => {
     setCatFacts(unfilteredCatFacts)
   }
 
-  function onKeyDown (event) {
+  function onKeyDown (event: KeyboardEvent) {
     // Toggle search form visibility when the user taps "s" anywhere on the window
     if (event.keyCode === 83) {
       setSearchFormIsOpen(!searchFormIsOpen)

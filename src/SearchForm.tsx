@@ -1,15 +1,24 @@
 import React, {
-    useState
+    useState, ChangeEvent
 } from 'react';
+import { IListItem } from './types'
+
+type Props = {
+    onClose: () => void,
+    onKeyDown: (event: KeyboardEvent) => void,
+    list: Array<IListItem>,
+    setCatFacts: (unfilteredCatFacts : Array<IListItem>) => void,
+    unfilteredCatFacts: Array<IListItem>
+}
 
 // Requirements:
 // - mount/unmount when the user taps "s".
 // - unmount when the user presses the "Close" button
 // props: {onClose: Function}
-const SearchForm = ({ onClose, onKeyDown, list, setCatFacts, unfilteredCatFacts }) => {
+const SearchForm = ({ onClose, onKeyDown, list, setCatFacts, unfilteredCatFacts } : Props) => {
     const [searchEntry, setSearchEntry] = useState('')
 
-    const inputEvtHandler = (event) => {
+    const inputEvtHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setSearchEntry(event.target.value)
     }
 
@@ -24,7 +33,7 @@ const SearchForm = ({ onClose, onKeyDown, list, setCatFacts, unfilteredCatFacts 
     }
 
     const search = () => {
-        const filteredList = list.filter((catFact) => {
+        const filteredList = list.filter((catFact : IListItem) => {
             const matcher = catFact.text.search(searchEntry)
             if (matcher !== -1) {
                 return true

@@ -2,7 +2,13 @@ import React, {
     useState
 } from 'react';
 
-const CatFact = ({ upvotes, text }) => {
+type Props = {
+    key: number,
+    upvotes: number,
+    text: string
+}
+
+const CatFact = ({ upvotes, text } : Props) => {
     const [isVisible, setIsVisible] = useState(true)
 
     const hide = () => {
