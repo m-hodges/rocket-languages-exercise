@@ -10,19 +10,19 @@ const AllCatFacts = ({ list }) => {
   // Expected output [ { _id: "", upvotes: 1, text: "" }, { _id: "", upvotes: 2, text: "" }, { _id: "", upvotes 3, text: "" } ]
   const sortedList = [...list].sort((a, b) => (a.upvotes - b.upvotes))
 
-    return (
-      <ul>
-        {
-          sortedList.map((catFact, i) => (
-            <CatFact 
-              key={i}
-              upvotes={catFact.upvotes}
-              text={catFact.text}
-            />
-          ))
-        }
-      </ul>
-    )
+  return (
+    <ul>
+      {
+        sortedList.map((catFact, i) => (
+          <CatFact 
+            key={i}
+            upvotes={catFact.upvotes}
+            text={catFact.text}
+          />
+        ))
+      }
+    </ul>
+  )
 }
 
 

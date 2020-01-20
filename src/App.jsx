@@ -61,7 +61,7 @@ const App = () => {
       <>     
         <h1>Cat Facts</h1>
         <span>Tap 's' to toggle the search form!</span>
-        {searchFormIsOpen && <SearchForm onClose={closeSearchForm} />}
+        {searchFormIsOpen && <SearchForm onClose={closeSearchForm} onKeyDown={onKeyDown} list={catFacts} />}
         <AllCatFacts list={catFacts} />
         <footer>Copyright</footer>
       </>
