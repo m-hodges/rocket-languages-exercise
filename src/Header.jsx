@@ -4,7 +4,7 @@ import './style.css'
 const Header = () => {
     return (
         <div className='header'>
-            Cat Facts
+            CAT FACTS
         </div>
     );
 };

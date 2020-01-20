@@ -71,7 +71,8 @@ const App = () => {
                 onClose={closeSearchForm} 
                 onKeyDown={onKeyDown} 
                 list={catFacts} 
-                setCatFacts={setCatFacts} 
+                setCatFacts={setCatFacts}
+                unfilteredCatFacts={unfilteredCatFacts}
             />
         }
         <AllCatFacts list={catFacts} />
