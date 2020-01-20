@@ -22,7 +22,8 @@ const SearchForm = ({ onClose, onKeyDown, list, setCatFacts, unfilteredCatFacts 
         setSearchEntry(event.target.value)
     }
 
-    //change this to remove event handler when input is in focus, and add it back when it goes out of focus
+    //removes window event handler when user clicks on input box so they can type 's'
+    //window event handler is added back again when user clicks the close button
     const inputClickHandler = () => {
         window.removeEventListener("keydown", onKeyDown)
     }
