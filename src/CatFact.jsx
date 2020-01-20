@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {
+    useState
+} from 'react';
 
 const CatFact = ({upvotes, text}) => {
-    const [isVisible, setIsVisible] = React.useState(true)
+    const [isVisible, setIsVisible] = useState(true)
 
     const hide = () => {
         setIsVisible(!isVisible)
     }
+    
     return (
         <li>
             {isVisible && 
