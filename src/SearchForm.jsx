@@ -7,9 +7,9 @@ import React, {
 // - mount/unmount when the user taps "s".
 // - unmount when the user presses the "Close" button
 // props: {onClose: Function}
-const SearchForm = ({ onClose, onKeyDown, list }) => {
+const SearchForm = ({ onClose, onKeyDown, list, setCatFacts }) => {
     const [searchEntry, setSearchEntry] = useState('')
-
+    
     const inputEvtHandler = (event) => {
         setSearchEntry(event.target.value)
         console.log(searchEntry)
@@ -29,7 +29,7 @@ const SearchForm = ({ onClose, onKeyDown, list }) => {
                 return false
             }
         })
-        console.log(filteredList)
+        setCatFacts(filteredList)
     }
 
     return (
