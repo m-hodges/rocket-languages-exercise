@@ -1,6 +1,5 @@
 import React, {
-    useState,
-    useEffect
+    useState
 } from 'react';
 
 // Requirements:
@@ -9,7 +8,7 @@ import React, {
 // props: {onClose: Function}
 const SearchForm = ({ onClose, onKeyDown, list, setCatFacts }) => {
     const [searchEntry, setSearchEntry] = useState('')
-    
+
     const inputEvtHandler = (event) => {
         setSearchEntry(event.target.value)
         console.log(searchEntry)
@@ -37,7 +36,7 @@ const SearchForm = ({ onClose, onKeyDown, list, setCatFacts }) => {
             <h2>Search Form</h2>
             <input type="text" value={searchEntry} onChange={(event) => (inputEvtHandler(event))} onClick={() => (inputClickHandler())} />
             <button onClick={() => (search())}>Search</button>
-            <button onClick={() => (onClose())}>Close</button>
+            <button onClick={() => (onClose())}>Close & Clear</button>
         </div>
     )
 }

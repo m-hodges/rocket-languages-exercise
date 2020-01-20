@@ -13,6 +13,8 @@ const App = () => {
   var [searchFormIsOpen, setSearchFormIsOpen] = React.useState(false);  
   var [catFacts, setCatFacts] = React.useState(null);
   var [loading, setLoading] = React.useState(true);
+  //placeholder state to reset catFacts to normal after search is closed
+  var [uneditedCatFacts, setUneditedCatFacts] = React.useState(null)
 
   React.useEffect(function onMount() {
     // When component mounts, listen for keydown events
@@ -24,13 +26,14 @@ const App = () => {
   });
 
   function closeSearchForm() {
-    setSearchFormIsOpen(false);
+    setSearchFormIsOpen(false)
+    setCatFacts(uneditedCatFacts)
   }
 
   function onKeyDown (event) {
     // Toggle search form visibility when the user taps "s" anywhere on the window
     if (event.keyCode === 83) {
-      setSearchFormIsOpen(!searchFormIsOpen);
+      setSearchFormIsOpen(!searchFormIsOpen)
       }
    }
 
@@ -41,6 +44,7 @@ const App = () => {
       .then(response => response.json())
       .then(function(response) {
         setCatFacts(response.all);
+        setUneditedCatFacts(response.all)
       })     
       .then(function() {
         setLoading(false);
