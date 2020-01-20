@@ -1,5 +1,5 @@
 import React, {
-    useState, ChangeEvent
+    useState, ChangeEvent, useEffect
 } from 'react';
 import { IListItem } from './types'
 
@@ -18,6 +18,10 @@ type Props = {
 const SearchForm = ({ onClose, onKeyDown, list, setCatFacts, unfilteredCatFacts } : Props) => {
     const [searchEntry, setSearchEntry] = useState('')
 
+    useEffect(() => {
+        search()
+    }, [searchEntry])
+
     const inputEvtHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setSearchEntry(event.target.value)
     }
@@ -25,6 +29,7 @@ const SearchForm = ({ onClose, onKeyDown, list, setCatFacts, unfilteredCatFacts 
     //removes window event handler when user clicks on input box so they can type 's'
     //window event handler is added back again when user clicks the close button
     const inputClickHandler = () => {
+        console.log('hello')
         window.removeEventListener("keydown", onKeyDown)
     }
 
@@ -34,7 +39,7 @@ const SearchForm = ({ onClose, onKeyDown, list, setCatFacts, unfilteredCatFacts 
     }
 
     const search = () => {
-        const filteredList = list.filter((catFact : IListItem) => {
+        const filteredList = unfilteredCatFacts.filter((catFact : IListItem) => {
             const matcher = catFact.text.search(searchEntry)
             if (matcher !== -1) {
                 return true
@@ -49,7 +54,7 @@ const SearchForm = ({ onClose, onKeyDown, list, setCatFacts, unfilteredCatFacts 
         <div style={{border: "2px dashed red"}}>
             <h2>Search Form</h2>
             <input type="text" value={searchEntry} onChange={(event) => (inputEvtHandler(event))} onClick={() => (inputClickHandler())} />
-            <button onClick={() => (search())}>Search</button>
+            {/* <button onClick={() => (search())}>Search</button> */}
             <button onClick={() => (onClear())}>Clear</button>
             <button onClick={() => (onClose())}>Close</button>
         </div>

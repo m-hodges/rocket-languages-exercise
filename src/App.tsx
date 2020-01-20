@@ -18,13 +18,14 @@ const App = () => {
   var [unfilteredCatFacts, setUnfilteredCatFacts] = React.useState(null)
 
   React.useEffect(function onMount() {
+    console.log('hi')
     // When component mounts, listen for keydown events
     window.addEventListener("keydown", onKeyDown)
     // Unmount the event listener when the component unmounts
     return function cleanup () {
       window.removeEventListener("keydown", onKeyDown)
     }
-  });
+  }, [searchFormIsOpen]);
 
   function closeSearchForm() {
     setSearchFormIsOpen(false)
