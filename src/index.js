@@ -52,7 +52,6 @@ export default function App() {
   function onKeyDown (event) {
     // Toggle search form visibility when the user taps "s" anywhere on the window
     if (event.keyCode === 83) {
-      console.log('hi')
       setSearchFormIsOpen(!searchFormIsOpen);
       }
    }
@@ -143,20 +142,34 @@ class AllCatFacts extends React.Component {
     this.sortListByUpvotesDescending();
   }
 
-  hide() { }
+  hide(index) {
+    console.log(index)
+  }
 
   render() {
-    var componentList = [];
-    // eslint-disable-next-line
-    this.props.list.map((catFact) => {
-      componentList.push(
-        <li>
-          <span>[{catFact.upvotes} upvotes]: {catFact.text}</span>
-          <button onClick={this.hide}>x</button>
-        </li>
-      );
-    });
-    return <ul>{componentList}</ul>;
+    // var componentList = [];
+    return (
+      <ul>
+        {
+          this.props.list.map((catFact, i) => (
+            <li key={i}>
+              <span>[{catFact.upvotes} upvotes]: {catFact.text}</span>
+              <button onClick={() => this.hide(i)}>x</button>
+            </li>
+          ))
+        }
+      </ul>
+    )
+
+    
+    // this.props.list.map((catFact, i) => {
+    //   componentList.push(
+    //     <li key={i}>
+          
+    //     </li>
+    //   );
+    // });
+    // return <ul>{componentList}</ul>;
   }
 }
 
