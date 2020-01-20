@@ -1,5 +1,6 @@
 import AllCatFacts from './AllCatFacts'
 import SearchForm from './SearchForm'
+import Header from './Header'
 
 const React = require('react')
 
@@ -14,7 +15,7 @@ const App = () => {
   var [catFacts, setCatFacts] = React.useState(null);
   var [loading, setLoading] = React.useState(true);
   //placeholder state to reset catFacts to normal after search is closed
-  var [uneditedCatFacts, setUneditedCatFacts] = React.useState(null)
+  var [unfilteredCatFacts, setUnfilteredCatFacts] = React.useState(null)
 
   React.useEffect(function onMount() {
     // When component mounts, listen for keydown events
@@ -27,7 +28,7 @@ const App = () => {
 
   function closeSearchForm() {
     setSearchFormIsOpen(false)
-    setCatFacts(uneditedCatFacts)
+    setCatFacts(unfilteredCatFacts)
   }
 
   function onKeyDown (event) {
@@ -44,7 +45,7 @@ const App = () => {
       .then(response => response.json())
       .then(function(response) {
         setCatFacts(response.all);
-        setUneditedCatFacts(response.all)
+        setUnfilteredCatFacts(response.all)
       })     
       .then(function() {
         setLoading(false);
@@ -54,7 +55,7 @@ const App = () => {
   if (loading) {
     return (
       <>
-        <h1>Cat Facts</h1>
+        <Header />
         <div>Tap 's' to toggle the search form!</div>
         <span>Loading...</span>
         <footer>Copyright</footer>
@@ -63,7 +64,7 @@ const App = () => {
   } else if (searchFormIsOpen) {
     return (
       <>     
-        <h1>Cat Facts</h1>
+        <Header />
         <span>Tap 's' to toggle the search form!</span>
         {searchFormIsOpen && 
             <SearchForm 
@@ -80,7 +81,7 @@ const App = () => {
   } else {
     return (
       <>
-        <h1>Cat Facts</h1>
+        <Header />
         <span>Tap 's' to toggle the search form!</span>
         <AllCatFacts list={catFacts} />
         <footer>Copyright</footer>
